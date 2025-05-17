@@ -1,0 +1,1 @@
+class CatBreedModel : ArrayList<CatBreedModelItem>()

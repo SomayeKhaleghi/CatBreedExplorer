@@ -23,7 +23,14 @@ android {
     }
 
     buildTypes {
+
+        debug {
+            buildConfigField("String", "CAT_API_KEY", "\"live_GCcvNSFLuUYxjONK9WB1jTlHsQ4pCdwE4H07voDSd4IHc5ITMoUSuNf5nXtVaucp\"")
+
+        }
         release {
+            buildConfigField("String", "CAT_API_KEY", "\"live_GCcvNSFLuUYxjONK9WB1jTlHsQ4pCdwE4H07voDSd4IHc5ITMoUSuNf5nXtVaucp\"")
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -34,15 +41,24 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
+
+
     }
     kotlinOptions {
         jvmTarget = "11"
     }
     buildFeatures {
+        buildConfig = true
         compose = true
     }
 
- /*   composeOptions {
+
+
+ /*
+       sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+
+    composeOptions {
         kotlinCompilerExtensionVersion = "1.5.0"
     }*/
 }
@@ -89,7 +105,6 @@ dependencies {
 
     // Hilt for Dependency Injection
    // implementation("com.google.dagger:hilt-android:2.44")
-  //  kapt("com.google.dagger:hilt-compiler:2.44")
 
     // Navigation (Compose)
     //implementation(libs.androidx.navigation.compose)
@@ -97,6 +112,10 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
+    implementation(libs.okhttp.v4100)
+    implementation(libs.logging.interceptor)
 
+    // Hilt Navigation Compose
+    implementation(libs.androidx.hilt.navigation.compose)
 
 }
