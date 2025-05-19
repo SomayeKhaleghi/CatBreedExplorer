@@ -3,8 +3,8 @@ package com.challenge.catbreedexplorer.ui.catlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.challenge.catbreedexplorer.network.ApiService
-import com.challenge.catbreedexplorer.network.model.CatBreedDto
+import com.challenge.catbreedexplorer.data.CatRepository
+import com.challenge.catbreedexplorer.data.remote.ApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CatListViewModel @Inject constructor(
-    private val apiService: ApiService
+    private val repository: CatRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow(CatListState())
@@ -34,7 +34,7 @@ class CatListViewModel @Inject constructor(
         viewModelScope.launch {
             _state.value = CatListState(isLoading = true)
             try {
-                val response = apiService.getCatBreeds()
+                val response = repository.getCatBreeds()
                 if (response.isSuccessful) {
                     _state.value = CatListState(
                         isLoading = false,

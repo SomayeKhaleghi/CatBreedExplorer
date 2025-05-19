@@ -1,6 +1,7 @@
-package com.challenge.catbreedexplorer.network
+package com.challenge.catbreedexplorer.di
 
-import com.challenge.catbreedexplorer.BuildConfig
+//import com.challenge.catbreedexplorer.BuildConfig
+import com.challenge.catbreedexplorer.data.remote.ApiService
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -18,8 +19,9 @@ import javax.inject.Singleton
 object NetworkModule {
 
     private var baseURL="https://api.thecatapi.com/"
+    private var apiKey="live_GCcvNSFLuUYxjONK9WB1jTlHsQ4pCdwE4H07voDSd4IHc5ITMoUSuNf5nXtVaucp"
 
-    @Provides
+  @Provides
     @Singleton
     fun provideGson(): Gson = GsonBuilder().create()
 
@@ -34,14 +36,14 @@ object NetworkModule {
             .addInterceptor(logging)
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
-                    .addHeader("x-api-key", BuildConfig.CAT_API_KEY)
+                    .addHeader("x-api-key", apiKey)// todo .... BuildConfig.CAT_API_KEY)
                     .build()
                 chain.proceed(request)
             }
             .build()
     }
 
-    @Provides
+        @Provides
     @Singleton
     fun provideRetrofit(client: OkHttpClient, gson: Gson): Retrofit =
         Retrofit.Builder()
@@ -49,6 +51,7 @@ object NetworkModule {
             .client(client)
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
+
 
     @Provides
     @Singleton

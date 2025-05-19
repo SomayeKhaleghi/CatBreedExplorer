@@ -1,6 +1,5 @@
-package com.challenge.catbreedexplorer.network
+package com.challenge.catbreedexplorer.data.remote
 
-import com.challenge.catbreedexplorer.network.model.CatBreedDto
 import retrofit2.Response
 import retrofit2.http.GET
 

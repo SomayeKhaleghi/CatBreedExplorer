@@ -38,29 +38,35 @@ android {
             )
         }
     }
-    compileOptions {
+
+
+    /*compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
 
 
-    }
+    }*/
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
+
     buildFeatures {
         buildConfig = true
         compose = true
     }
 
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+	
+	composeOptions {
+		kotlinCompilerExtensionVersion = "1.5.14"
+	}
 
-
- /*
-       sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
-    }*/
+    tasks.withType<JavaCompile> {
+        options.compilerArgs.add("-Xlint:-deprecation")
+    }
 }
 
 dependencies {
@@ -80,42 +86,12 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
-
-       //kapt 'com.google.dagger:hilt-android-compiler:2.44'
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
     implementation (libs.okhttp)
-
-    val room_version = "2.6.1"
-
-    implementation("androidx.room:room-runtime:$room_version")
-
-    // If this project uses any Kotlin source, use Kotlin Symbol Processing (KSP)
-    // See Add the KSP plugin to your project
-    ksp("androidx.room:room-compiler:$room_version")
-
-    // optional - Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:$room_version")
-
-/*
-    // optional - Paging 3 Integration
-    implementation("androidx.room:room-paging:$room_version")
-*/
-
-
-    // Hilt for Dependency Injection
-   // implementation("com.google.dagger:hilt-android:2.44")
-
-    // Navigation (Compose)
-    //implementation(libs.androidx.navigation.compose)
-
-    implementation(libs.hilt.android)
-    ksp(libs.hilt.android.compiler)
-
     implementation(libs.okhttp.v4100)
     implementation(libs.logging.interceptor)
-
-    // Hilt Navigation Compose
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
-
 }
