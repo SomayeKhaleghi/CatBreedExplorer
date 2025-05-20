@@ -1,6 +1,6 @@
 package com.challenge.catbreedexplorer.ui.catlist
 
-import com.challenge.catbreedexplorer.model.CatBreed
+import com.challenge.catbreedexplorer.domain.model.CatBreed
 
 sealed class CatListState {
     object Loading : CatListState()

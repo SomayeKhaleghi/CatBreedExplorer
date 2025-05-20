@@ -1,6 +1,4 @@
-package com.challenge.catbreedexplorer.data.remote
-
-import com.google.gson.annotations.SerializedName
+package com.challenge.catbreedexplorer.data.remote.catimage
 
 data class CatImageDto(
     val id: String,

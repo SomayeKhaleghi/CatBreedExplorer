@@ -1,7 +1,6 @@
-package com.challenge.catbreedexplorer.data.local
+package com.challenge.catbreedexplorer.data.local.catbreed
 
-import com.challenge.catbreedexplorer.data.remote.toDomain
-import com.challenge.catbreedexplorer.model.CatBreed
+import com.challenge.catbreedexplorer.domain.model.CatBreed
 fun CatBreedEntity.toDomain(): CatBreed {
     return CatBreed(
         id = this.id,

@@ -3,9 +3,16 @@ package com.challenge.catbreedexplorer.di
 import android.content.Context
 import androidx.room.Room
 import com.challenge.catbreedexplorer.BuildConfig
-import com.challenge.catbreedexplorer.data.local.CatBreedDao
+import com.challenge.catbreedexplorer.data.local.catbreed.CatBreedDao
 import com.challenge.catbreedexplorer.data.local.CatDatabase
+import com.challenge.catbreedexplorer.data.local.catimage.CatImageDao
 import com.challenge.catbreedexplorer.data.remote.ApiService
+import com.challenge.catbreedexplorer.data.repository.CatBreedRepositoryImpl
+import com.challenge.catbreedexplorer.data.repository.CatDetailRepositoryImpl
+import com.challenge.catbreedexplorer.data.repository.CatImageRepositoryImpl
+import com.challenge.catbreedexplorer.domain.repository.CatBreedRepository
+import com.challenge.catbreedexplorer.domain.repository.CatDetailRepository
+import com.challenge.catbreedexplorer.domain.repository.CatImageRepository
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -25,12 +32,10 @@ object AppModule {
 
     private const val BASE_URL = "https://api.thecatapi.com/"
 
-    // Gson Provider (For Retrofit)
     @Provides
     @Singleton
     fun provideGson(): Gson = GsonBuilder().create()
 
-    //  OkHttpClient with Logging and API Key Interceptor
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
@@ -53,7 +58,6 @@ object AppModule {
             .build()
     }
 
-    //  Retrofit with OkHttpClient and Gson
     @Provides
     @Singleton
     fun provideRetrofit(
@@ -67,14 +71,12 @@ object AppModule {
             .build()
     }
 
-    //  ApiService Provider (Retrofit Service)
     @Provides
     @Singleton
     fun provideApiService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
     }
 
-    //  Room Database Setup (Using KSP, No Kapt)
     @Provides
     @Singleton
     fun provideDatabase(@ApplicationContext context: Context): CatDatabase {
@@ -85,9 +87,44 @@ object AppModule {
         ).fallbackToDestructiveMigration().build()
     }
 
-    //  DAO Provider (CatBreedDao)
     @Provides
+    @Singleton
     fun provideCatBreedDao(database: CatDatabase): CatBreedDao {
         return database.catBreedDao()
     }
+
+    @Provides
+    @Singleton
+    fun provideCatImageDao(database: CatDatabase): CatImageDao {
+        return database.catImageDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCatImageRepository(
+        apiService: ApiService,
+        catImageDao: CatImageDao
+    ): CatImageRepository {
+        return CatImageRepositoryImpl(apiService, catImageDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCatBreedRepository(
+        apiService: ApiService,
+        catBreedDao: CatBreedDao
+    ): CatBreedRepository {
+        return CatBreedRepositoryImpl(apiService, catBreedDao)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCatDetailRepository(
+        dao: CatBreedDao,
+        apiService: ApiService
+    ): CatDetailRepository {
+        return CatDetailRepositoryImpl(dao, apiService)
+    }
+
+
 }

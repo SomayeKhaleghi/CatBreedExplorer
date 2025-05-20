@@ -1,4 +1,4 @@
-package com.challenge.catbreedexplorer.data.remote
+package com.challenge.catbreedexplorer.data.remote.catbreed
 
 import com.google.gson.annotations.SerializedName
 

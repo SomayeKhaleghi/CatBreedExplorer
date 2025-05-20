@@ -1,29 +1,24 @@
-package com.challenge.catbreedexplorer.data
+package com.challenge.catbreedexplorer.data.repository
 
-import com.challenge.catbreedexplorer.data.local.CatBreedDao
-import com.challenge.catbreedexplorer.data.local.CatBreedEntity
-import com.challenge.catbreedexplorer.data.local.toDomain
-import com.challenge.catbreedexplorer.data.local.toEntity
+import com.challenge.catbreedexplorer.data.local.catbreed.CatBreedDao
+import com.challenge.catbreedexplorer.data.local.catbreed.CatBreedEntity
+import com.challenge.catbreedexplorer.data.local.catbreed.toDomain
+import com.challenge.catbreedexplorer.data.local.catbreed.toEntity
 import com.challenge.catbreedexplorer.data.remote.ApiService
-import com.challenge.catbreedexplorer.data.remote.toDomain
-import com.challenge.catbreedexplorer.model.CatBreed
+import com.challenge.catbreedexplorer.data.remote.catbreed.toDomain
+import com.challenge.catbreedexplorer.domain.model.CatBreed
+import com.challenge.catbreedexplorer.domain.repository.CatBreedRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
-class CatRepository @Inject constructor(
+
+class CatBreedRepositoryImpl @Inject constructor(
     private val apiService: ApiService,
     private val catBreedDao: CatBreedDao
-) {
-
-    /**
-     * Fetch cat breeds from API (List<CatBreedDto>) and save to local database (List<CatBreedEntity>)
-     */
-    suspend fun refreshCatBreeds() {
+) : CatBreedRepository{
+    override suspend fun refreshCatBreeds() {
         val apiResponse = apiService.getCatBreeds()
         if (apiResponse.isSuccessful) {
             apiResponse.body()?.let { catBreedsDto ->
@@ -37,10 +32,7 @@ class CatRepository @Inject constructor(
         }
     }
 
-    /**
-     * Get all cat breeds from local database (Room) using Flow
-     */
-    fun getCatBreeds(): Flow<List<CatBreed>> {
+    override fun getCatBreeds(): Flow<List<CatBreed>> {
         return catBreedDao.getAllCatBreeds()
             .catch { emit(emptyList()) } // Handle any database errors
             .map { entities ->

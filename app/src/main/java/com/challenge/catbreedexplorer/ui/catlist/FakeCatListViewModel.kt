@@ -3,7 +3,7 @@ package com.challenge.catbreedexplorer.ui.catlist
 import android.annotation.SuppressLint
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
-import com.challenge.catbreedexplorer.model.CatBreed
+import com.challenge.catbreedexplorer.domain.model.CatBreed
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow

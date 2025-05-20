@@ -3,8 +3,8 @@ package com.challenge.catbreedexplorer.ui.catlist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.challenge.catbreedexplorer.data.CatRepository
-import com.challenge.catbreedexplorer.model.CatBreed
+import com.challenge.catbreedexplorer.domain.repository.CatBreedRepository
+import com.challenge.catbreedexplorer.domain.model.CatBreed
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CatListViewModel @Inject constructor(
-    private val repository: CatRepository
+    private val repository: CatBreedRepository
 ) : ViewModel() {
 
     // StateFlow to manage UI state (Immutable StateFlow)

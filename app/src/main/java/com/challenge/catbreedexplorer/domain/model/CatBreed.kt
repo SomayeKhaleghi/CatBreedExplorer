@@ -1,14 +1,8 @@
-package com.challenge.catbreedexplorer.data.local
+package com.challenge.catbreedexplorer.domain.model
 
-
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-@Entity(tableName = "cat_breeds")
-data class CatBreedEntity(
-    @PrimaryKey(autoGenerate = true)
-    val localId: Int = 0,
+data class CatBreed(
     val id: String,
     val name: String,
     val description: String,
