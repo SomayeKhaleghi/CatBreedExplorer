@@ -91,7 +91,12 @@ dependencies {
     implementation (libs.okhttp)
     implementation(libs.okhttp.v4100)
     implementation(libs.logging.interceptor)
+    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    ksp(libs.androidx.room.compiler)
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
+    implementation(libs.coil.compose)
+
 }

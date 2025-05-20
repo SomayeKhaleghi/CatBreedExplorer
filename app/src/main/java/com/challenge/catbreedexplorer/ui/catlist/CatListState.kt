@@ -1,7 +1,10 @@
 package com.challenge.catbreedexplorer.ui.catlist
 
-data class CatListState(
-    val isLoading: Boolean = false,
-    val cats: List<String> = emptyList(),
-    val error: String? = null
-)
+import com.challenge.catbreedexplorer.model.CatBreed
+
+sealed class CatListState {
+    object Loading : CatListState()
+    data class Success(val cats: List<CatBreed>) : CatListState()
+    data class Error(val message: String) : CatListState()
+    object Empty : CatListState()
+}

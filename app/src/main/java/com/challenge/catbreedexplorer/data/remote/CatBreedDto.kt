@@ -13,13 +13,11 @@ data class CatBreedDto(
     @SerializedName("name") val name: String,
     @SerializedName("temperament") val temperament: String,
     @SerializedName("origin") val origin: String,
-    @SerializedName( "wikipedia_url") val wikiURL: String,
-    @SerializedName("image")  val catImage: CatImage
-)
-
-data class CatImage(
-    val height: Int,
-    val id: String,
-    val url: String,
-    val width: Int
-)
+    @SerializedName( "wikipedia_url") val wikipediaUrl: String?,
+    @SerializedName("image") val image: ImageDto?
+) {
+    data class ImageDto(
+        @SerializedName("id") val id: String?,
+        @SerializedName("url") val url: String?
+    )
+}

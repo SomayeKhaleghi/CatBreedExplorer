@@ -1,6 +1,6 @@
 package com.challenge.catbreedexplorer.ui.catlist
 
 sealed class CatListIntent {
-    object LoadCatList : CatListIntent()
-    data class SearchCat(val query: String) : CatListIntent()
+    data class SearchCats(val query: String) : CatListIntent()
+    object RefreshCats : CatListIntent()
 }
