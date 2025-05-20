@@ -2,8 +2,12 @@
     {
         "id": "abys",
         "name": "Abyssinian",
-        "temperament": "Active, Energetic, Independent, Intelligent, Gentle",
         "origin": "Egypt",
+        "description": "The Abyssinian is easy to care for, and a joy to have in your home. They’re affectionate cats and love both people and other animals.",
+
+        "life_span": "14 - 15",
+        "temperament": "Active, Energetic, Independent, Intelligent, Gentle",
+
         "wikipedia_url": "https://en.wikipedia.org/wiki/Abyssinian_(cat)",
         "image": {
             "id": "0XYvRd7oD",
@@ -15,7 +19,9 @@
     {
         "id": "aege",
         "name": "Aegean",
+        "description": "Native to the Greek islands known as the Cyclades in the Aegean Sea, these are natural cats, meaning they developed without humans getting involved in their breeding. As a breed, Aegean Cats are rare, although they are numerous on their home islands. They are generally friendly toward people and can be excellent cats for families with children.",
         "temperament": "Affectionate, Social, Intelligent, Playful, Active",
+        "life_span": "9 - 12",
         "origin": "Greece",
         "wikipedia_url": "https://en.wikipedia.org/wiki/Aegean_cat",
         "image": {

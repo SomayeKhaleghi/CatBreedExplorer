@@ -11,6 +11,8 @@ import com.google.gson.annotations.SerializedName
 data class CatBreedDto(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
+    @SerializedName("description") val description: String,
+    @SerializedName("life_span") val lifeSpan: String,
     @SerializedName("temperament") val temperament: String,
     @SerializedName("origin") val origin: String,
     @SerializedName( "wikipedia_url") val wikipediaUrl: String?,

@@ -1,10 +1,13 @@
 package com.challenge.catbreedexplorer.data.local
 
+import com.challenge.catbreedexplorer.data.remote.toDomain
 import com.challenge.catbreedexplorer.model.CatBreed
 fun CatBreedEntity.toDomain(): CatBreed {
     return CatBreed(
         id = this.id,
         name = this.name,
+        description = this.description,
+        lifeSpan  = this.lifeSpan,
         temperament = this.temperament,
         origin = this.origin,
         wikipediaUrl = this.wikipediaUrl,
@@ -16,6 +19,8 @@ fun CatBreed.toEntity(): CatBreedEntity {
     return CatBreedEntity(
         id = this.id,
         name = this.name,
+        description = this.description,
+        lifeSpan  = this.lifeSpan,
         temperament = this.temperament,
         origin = this.origin,
         imageUrl = this.imageUrl,

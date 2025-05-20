@@ -6,19 +6,24 @@ fun CatBreedDto.toDomain(): CatBreed {
     return CatBreed(
         id = this.id,
         name = this.name,
+        description = this.description,
+        lifeSpan  = this.lifeSpan,
         temperament = this.temperament,
         origin = this.origin,
         imageUrl = this.image?.url,
         wikipediaUrl = this.wikipediaUrl
     )
 }
-
+/*
 fun CatBreed.toDto(): CatBreedDto {
     return CatBreedDto(
         id = this.id,
         name = this.name,
+        description = this.description,
+        lifeSpan  = this.lifeSpan,
         temperament = this.temperament,
         origin = this.origin,
+
         wikipediaUrl = this.wikipediaUrl,
         image = if (this.imageUrl != null) {
             CatBreedDto.ImageDto(
@@ -29,5 +34,5 @@ fun CatBreed.toDto(): CatBreedDto {
             null
         }
     )
-}
+}*/
 

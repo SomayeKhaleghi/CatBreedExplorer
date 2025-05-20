@@ -11,6 +11,8 @@ data class CatBreedEntity(
     val localId: Int = 0,
     val id: String,
     val name: String,
+    val description: String,
+    val lifeSpan: String,
     val temperament: String,
     val origin: String,
     val wikipediaUrl: String?,
