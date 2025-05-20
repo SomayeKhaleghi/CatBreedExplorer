@@ -2,6 +2,7 @@ package com.challenge.catbreedexplorer.ui.catdetail
 
 import android.content.Intent
 import android.net.Uri
+import androidx.browser.customtabs.CustomTabsIntent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -113,8 +114,8 @@ fun CatDetailContent(breed: CatBreed, images: List<CatImage>) {
         breed.wikipediaUrl?.let { url ->
             Button (
                 onClick = {
-                    val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-                    context.startActivity(intent)
+                    val intent = CustomTabsIntent.Builder().build()
+                    intent.launchUrl(context, Uri.parse(url))
                 },
                 modifier = Modifier.padding(vertical = 8.dp)
             ) {
