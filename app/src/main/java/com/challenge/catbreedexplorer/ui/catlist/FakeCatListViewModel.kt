@@ -1,5 +1,7 @@
 package com.challenge.catbreedexplorer.ui.catlist
 
+import android.annotation.SuppressLint
+import androidx.compose.runtime.Composable
 import androidx.lifecycle.ViewModel
 import com.challenge.catbreedexplorer.model.CatBreed
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -50,4 +52,10 @@ class FakeCatListViewModel : ViewModel() {
     fun setEmpty() {
         _state.value = CatListState.Empty
     }
+}
+
+@SuppressLint("ViewModelConstructorInComposable")
+@Composable
+fun rememberFakeCatListViewModel(): FakeCatListViewModel {
+    return FakeCatListViewModel()
 }

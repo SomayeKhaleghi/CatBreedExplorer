@@ -81,7 +81,7 @@ object AppModule {
         return Room.databaseBuilder(
             context,
             CatDatabase::class.java,
-            "cat_db"
+            "cat.db"
         ).fallbackToDestructiveMigration().build()
     }
 

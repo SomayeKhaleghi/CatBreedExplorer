@@ -41,7 +41,7 @@ class CatListViewModel @Inject constructor(
     /**
      * Refreshes the cat breeds from API and stores them in the database.
      */
-     fun refreshCatBreeds() {
+     private  fun refreshCatBreeds() {
         viewModelScope.launch {
             _state.value = CatListState.Loading
             try {
@@ -64,24 +64,27 @@ class CatListViewModel @Inject constructor(
     }
 
     /**
-     * Searches for cats based on the query (real-time search).
+     * Searches for cats based on the query (real-time search & Filtering Existing List)
      */
-     fun searchCats(query: String) {
+    private fun searchCats(query: String) {
         if (query.isBlank()) {
             _state.value = CatListState.Success(allCatBreeds) // Show all if query is blank
             return
         }
 
         viewModelScope.launch {
-            val filteredCats = allCatBreeds.filter {
-                it.name.contains(query, ignoreCase = true)
+            val currentState = _state.value
+            if (currentState is CatListState.Success) {
+                val filteredCats = currentState.cats.filter {
+                    it.name.contains(query, ignoreCase = true)
+                }
+                _state.value = if (filteredCats.isEmpty()) {
+                    CatListState.Empty
+                } else {
+                    CatListState.Success(filteredCats)
+                }
             }
 
-            _state.value = if (filteredCats.isNotEmpty()) {
-                CatListState.Success(filteredCats)
-            } else {
-                CatListState.Empty
-            }
         }
     }
 }
