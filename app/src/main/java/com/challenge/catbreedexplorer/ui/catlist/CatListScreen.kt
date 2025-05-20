@@ -1,6 +1,7 @@
 // CatListScreen.kt
 package com.challenge.catbreedexplorer.ui.catlist
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.BasicTextField
@@ -17,13 +18,15 @@ import com.challenge.catbreedexplorer.model.CatBreed
 import com.challenge.catbreedexplorer.ui.components.OptimizedCatImage
 
 @Composable
-fun CatListScreen(viewModel: CatListViewModel = hiltViewModel()) {
+fun CatListScreen(viewModel: CatListViewModel = hiltViewModel(),
+                  onNavigateToDetail: (String) -> Unit) {
     val state by viewModel.state.collectAsState()
 
     CatListScreenContent(
         state = state,
         onSearch = { query -> viewModel.handleIntent(CatListIntent.SearchCats(query)) },
-        onRetry = { viewModel.handleIntent(CatListIntent.RefreshCats) }
+        onRetry = { viewModel.handleIntent(CatListIntent.RefreshCats) },
+        onCatClicked = { breedId -> onNavigateToDetail(breedId)}
     )
 }
 
@@ -31,7 +34,8 @@ fun CatListScreen(viewModel: CatListViewModel = hiltViewModel()) {
 fun CatListScreenContent(
     state: CatListState,
     onSearch: (String) -> Unit,
-    onRetry: () -> Unit
+    onRetry: () -> Unit,
+    onCatClicked: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -82,7 +86,8 @@ fun CatListScreenContent(
                     contentPadding = PaddingValues(vertical = 8.dp)
                 ) {
                     items(state.cats.size) { index ->
-                        CatListItem(cat = state.cats[index])
+                        CatListItem(cat = state.cats[index],
+                            onClick = onCatClicked)
                     }
                 }
             }
@@ -124,12 +129,13 @@ fun CatListScreenContent(
 }
 
 @Composable
-fun CatListItem(cat: CatBreed) {
+fun CatListItem(cat: CatBreed, onClick: (String) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 8.dp)
-    ) {
+            .clickable{ onClick(cat.id)}
+                ) {
 
         OptimizedCatImage(
             imageUrl = cat.imageUrl,
@@ -158,7 +164,7 @@ fun CatListItem(cat: CatBreed) {
     }
 }
 
-@Preview(showBackground = true)
+/*@Preview(showBackground = true)
 @Composable
 fun CatListScreenPreview() {
     val fakeViewModel = rememberFakeCatListViewModel()
@@ -169,4 +175,4 @@ fun CatListScreenPreview() {
         onSearch = {},
         onRetry = {}
     )
-}
+}*/

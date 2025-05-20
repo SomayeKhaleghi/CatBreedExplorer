@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.navigation.compose.rememberNavController
 import com.challenge.catbreedexplorer.ui.catlist.CatListScreen
+import com.challenge.catbreedexplorer.ui.navigation.AppNavHost
 import com.challenge.catbreedexplorer.ui.theme.CatBreedExplorerTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,9 +16,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            CatBreedExplorerTheme {
+            /*CatBreedExplorerTheme {
                 CatListScreen()
-            }
+            }*/
+
+            val navController = rememberNavController()
+            AppNavHost(navController = navController)
         }
     }
 }

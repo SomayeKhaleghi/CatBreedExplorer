@@ -4,6 +4,7 @@ converterGson = "2.11.0"
 hiltAndroid = "2.56.2"
 hiltNavigationCompose = "1.2.0"
 loggingInterceptor = "4.9.3"
+navigationCompose = "2.8.8"
 okhttp = "4.9.3"
 okhttpVersion = "4.12.0"
 agp = "8.7.3"
@@ -20,6 +21,7 @@ roomRuntime = "2.6.1"
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
