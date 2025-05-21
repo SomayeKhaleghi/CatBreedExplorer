@@ -42,15 +42,9 @@ A modern Android application built with Jetpack Compose, MVI architecture, Room,
 ## 🔮 Demo
 https://drive.google.com/file/d/1pVMDehKo6sDvC8WVcmYMc24BqWa6fCIL/view?usp=sharing
 
-
 This demo showcases:
-- Navigation between list and detail views
-- Smooth scrolling and screen rotation
-- Offline mode functionality after disconnecting network
-- Image caching and restored UI state
-
-- Smooth scrolling and responsive layouts in both portrait and landscape modes
 - Navigating from the cat list to breed detail screen
+- Smooth scrolling and responsive layouts in both portrait and landscape modes
 - Proper offline caching (data remains accessible when network is disconnected)
 - Image loading optimizations (images are not reloaded unnecessarily)
 - Opening the breed’s Wikipedia page in a browser
