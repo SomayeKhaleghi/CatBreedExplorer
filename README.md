@@ -39,7 +39,7 @@ A modern Android application built with Jetpack Compose, MVI architecture, Room,
 
 ---
 
-## 🔮 Demo
+## 📹 Demo Video
 https://drive.google.com/file/d/1pVMDehKo6sDvC8WVcmYMc24BqWa6fCIL/view?usp=sharing
 
 This demo showcases:
