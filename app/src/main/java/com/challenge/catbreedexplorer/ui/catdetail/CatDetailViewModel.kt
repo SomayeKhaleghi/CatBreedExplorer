@@ -26,11 +26,12 @@ class CatDetailViewModel @Inject constructor(
     fun loadDetails(breedId: String) {
         viewModelScope.launch {
             try {
+
                 _uiState.value = CatDetailState.Loading
 
                 val breed = catDetailRepository.getBreedById(breedId)
                 val useCache = !networkChecker.isOnline()
-                if ( (breed != null)  ||  useCache) {
+                if (useCache) {
                     val cachedImages =
                         catImageRepository.getImagesForBreed(breedId).firstOrNull() ?: emptyList()
                     if (breed != null) {
@@ -38,6 +39,16 @@ class CatDetailViewModel @Inject constructor(
                     } else {
                         _uiState.value =
                             CatDetailState.Error("Offline and no cached data available.")
+                    }
+                    return@launch
+                }
+
+                val cachedImages = catImageRepository.getImagesForBreed(breedId).firstOrNull()
+                if (!cachedImages.isNullOrEmpty()) {
+                    if (breed != null) {
+                        _uiState.value = CatDetailState.Success(breed, cachedImages)
+                    } else {
+                        _uiState.value = CatDetailState.Empty
                     }
                     return@launch
                 }
@@ -54,17 +65,17 @@ class CatDetailViewModel @Inject constructor(
 
                 } catch (e: Exception) {
                     if (breed != null) {
-                        val cachedImages =
+                        val images =
                             catImageRepository.getImagesForBreed(breedId).firstOrNull()
                                 ?: emptyList()
-                        _uiState.value = CatDetailState.Success(breed, cachedImages)
+                        _uiState.value = CatDetailState.Success(breed, images)
                     } else {
                         _uiState.value =
                             CatDetailState.Error("Something went wrong. Offline and no cache.")
                     }
                 }
             } catch (e: Exception) {
-                CatDetailState.Error("Something went wrong. Offline and no cache.")
+                CatDetailState.Error("Unexpected error occurred.")
             }
         }
     }
