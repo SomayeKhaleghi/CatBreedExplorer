@@ -1,6 +1,8 @@
 # CatBreedExplorer
 
-A modern Android application built with Jetpack Compose, MVI architecture, Room, Retrofit, and Hilt, allowing users to explore various cat breeds with detailed information and images. Designed with performance, offline support, and clean architecture in mind.
+Cat Breed Explorer is a modern Android application built with Jetpack Compose, MVI architecture, Room, Retrofit, and Hilt, allowing users to explore various cat breeds with detailed information and images. It is designed with performance, offline support, and clean architecture in mind.
+
+Although the project is implemented as a single Gradle module, it follows a modular code structure, separating responsibilities across clearly defined layers: data, domain, ui, and di. This architecture is intentionally designed to be scalable and can be easily refactored into multiple Gradle modules as the project grows.
 ---
 
 ## 🚀 Features
