@@ -37,28 +37,11 @@ A modern Android application built with Jetpack Compose, MVI architecture, Room,
 ## 🏛 Architecture Overview
 ![image](https://github.com/user-attachments/assets/ccd2b2d5-108c-426e-94b7-1ff547c09eca)
 
-com.challenge.catbreedexplorer
-|├── data
-|   ├── local       → Room entities, DAOs
-|   ├── remote      → Retrofit service, DTOs
-|   └── repository  → Implementation of domain interfaces
-|
-├── domain
-|   ├── model       → Data models used across the app
-|   └── repository  → Repository interfaces
-|
-├── ui
-|   ├── catlist     → ViewModel + Composables for breed list
-|   ├── catdetail   → ViewModel + Composables for breed detail
-|   └── components  → Shared UI elements
-|
-├── utils          → NetworkChecker, extensions, etc.
-└── di             → Hilt AppModule
-
-
 ---
 
 ## 🔮 Demo
+![vido]
+
 This demo showcases:
 - Navigation between list and detail views
 - Smooth scrolling and screen rotation
