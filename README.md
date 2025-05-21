@@ -71,12 +71,12 @@ This demo showcases:
 
 
 ## ❌ Remaining / Optional Improvements
-
+- Favorite screen
+- Refactor into multiple Gradle modules using the Android plugin to enhance modularity and scalability
 - Pagination or lazy loading of API data (currently fetches all at once)
 - UI tests (e.g., using Compose Test framework)
 - Better error handling and retry logic per screen
 - Dark mode or theme customization
-- Localization support
 - test in  some other real device (SDK 21 to 34) 
 ---
 
