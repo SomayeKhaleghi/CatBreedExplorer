@@ -1,13 +1,11 @@
 package com.challenge.catbreedexplorer.ui.catlist
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.challenge.catbreedexplorer.domain.model.CatBreed
 import com.challenge.catbreedexplorer.domain.repository.CatBreedRepository
-import com.challenge.catbreedexplorer.utils.NetworkUtils
+import com.challenge.catbreedexplorer.utils.NetworkChecker
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -17,7 +15,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CatListViewModel @Inject constructor(
     private val repository: CatBreedRepository,
-    @ApplicationContext private val context: Context
+    private val networkChecker: NetworkChecker,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<CatListState>(CatListState.Loading)
@@ -36,13 +34,17 @@ class CatListViewModel @Inject constructor(
         }
     }
 
-     private  fun refreshCatBreeds() {
+    private fun refreshCatBreeds() {
         viewModelScope.launch {
             _state.value = CatListState.Loading
             try {
+                try {
+                    if (networkChecker.isOnline())
+                        repository.refreshCatBreeds() // API + DB update
+                } catch (e: Exception) {
+                    _state.value = CatListState.Error(e.message ?: "Failed to refreshCatBreeds.")
+                }
 
-/*
-                // Fetch from database (which now has fresh data)
                 repository.getCatBreeds().collect { cats ->
                     allCatBreeds = cats // Cache the list for searching
                     _state.value = if (cats.isNotEmpty()) {
@@ -51,25 +53,6 @@ class CatListViewModel @Inject constructor(
                         CatListState.Empty
                     }
                 }
-*/
-
-                try {
-                    if (NetworkUtils.isNetworkAvailable(context))
-                        repository.refreshCatBreeds() // API + DB update
-                } catch (e: Exception) {
-                    _state.value = CatListState.Error(e.message ?: "Failed to refreshCatBreeds.")
-                }
-
-               // if (allCatBreeds.isEmpty()) {
-                    repository.getCatBreeds().collect { cats ->
-                        allCatBreeds = cats // Cache the list for searching
-                        _state.value = if (cats.isNotEmpty()) {
-                            CatListState.Success(cats)
-                        } else {
-                            CatListState.Empty
-                        }
-                    }
-                //}
 
             } catch (e: Exception) {
                 _state.value = CatListState.Error(e.message ?: "Failed to refresh data.")

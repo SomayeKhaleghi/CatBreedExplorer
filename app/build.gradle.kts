@@ -44,6 +44,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
 
+    testImplementation(libs.mockk) // Latest as of 2025
+    testImplementation(libs.kotlinx.coroutines.test) // For coroutine testing
+
 
     }*/
     kotlinOptions {
@@ -99,8 +102,15 @@ dependencies {
     ksp(libs.hilt.android.compiler)
     implementation(libs.coil.compose)
     implementation(libs.androidx.navigation.compose)
-
     implementation(libs.androidx.browser)
+
+
+    testImplementation(libs.mockk) // Latest as of 2025
+    testImplementation(libs.kotlinx.coroutines.test) // For coroutine testing
+
+    testImplementation(libs.turbine)
+
+
 
 
 }

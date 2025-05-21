@@ -28,13 +28,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.challenge.catbreedexplorer.domain.model.CatBreed
 import com.challenge.catbreedexplorer.ui.components.OptimizedCatImage
-import com.challenge.catbreedexplorer.utils.NetworkUtils
 
 @Composable
 fun CatListScreen(
@@ -42,21 +40,16 @@ fun CatListScreen(
     onNavigateToDetail: (String) -> Unit,
 ) {
     val state by viewModel.state.collectAsState()
-    val context = LocalContext.current
-    val isConnected = remember { NetworkUtils.isNetworkAvailable(context) }
+
 
     LaunchedEffect(Unit) {
-            viewModel.handleIntent(CatListIntent.RefreshCats)
+        viewModel.handleIntent(CatListIntent.RefreshCats)
     }
 
     CatListScreenContent(
         state = state,
         onSearch = { query -> viewModel.handleIntent(CatListIntent.SearchCats(query)) },
-        onRetry = {
-            if (isConnected) {
-                viewModel.handleIntent(CatListIntent.RefreshCats)
-            }
-        },
+        onRetry = { viewModel.handleIntent(CatListIntent.RefreshCats) },
         onCatClicked = { breedId -> onNavigateToDetail(breedId) }
     )
 }

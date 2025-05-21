@@ -1,13 +1,11 @@
 package com.challenge.catbreedexplorer.ui.catdetail
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.challenge.catbreedexplorer.domain.repository.CatDetailRepository
 import com.challenge.catbreedexplorer.domain.repository.CatImageRepository
-import com.challenge.catbreedexplorer.utils.NetworkUtils
+import com.challenge.catbreedexplorer.utils.NetworkChecker
 import dagger.hilt.android.lifecycle.HiltViewModel
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -19,7 +17,7 @@ import javax.inject.Inject
 class CatDetailViewModel @Inject constructor(
     private val catDetailRepository: CatDetailRepository,
     private val catImageRepository: CatImageRepository,
-    @ApplicationContext private val context: Context
+    private val networkChecker: NetworkChecker,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow<CatDetailState>(CatDetailState.Loading)
@@ -31,7 +29,7 @@ class CatDetailViewModel @Inject constructor(
                 _uiState.value = CatDetailState.Loading
 
                 val breed = catDetailRepository.getBreedById(breedId)
-                val useCache = !NetworkUtils.isNetworkAvailable(context)
+                val useCache = !networkChecker.isOnline()
                 if (useCache) {
                     val cachedImages =
                         catImageRepository.getImagesForBreed(breedId).firstOrNull() ?: emptyList()
@@ -65,8 +63,7 @@ class CatDetailViewModel @Inject constructor(
                             CatDetailState.Error("Something went wrong. Offline and no cache.")
                     }
                 }
-            }
-            catch (e: Exception) {
+            } catch (e: Exception) {
                 CatDetailState.Error("Something went wrong. Offline and no cache.")
             }
         }

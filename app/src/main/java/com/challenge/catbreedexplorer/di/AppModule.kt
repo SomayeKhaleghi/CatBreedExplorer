@@ -13,6 +13,7 @@ import com.challenge.catbreedexplorer.data.repository.CatImageRepositoryImpl
 import com.challenge.catbreedexplorer.domain.repository.CatBreedRepository
 import com.challenge.catbreedexplorer.domain.repository.CatDetailRepository
 import com.challenge.catbreedexplorer.domain.repository.CatImageRepository
+import com.challenge.catbreedexplorer.utils.NetworkChecker
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -126,5 +127,10 @@ object AppModule {
         return CatDetailRepositoryImpl(dao, apiService)
     }
 
+    @Provides
+    @Singleton
+    fun provideNetworkChecker(@ApplicationContext context: Context): NetworkChecker {
+        return NetworkChecker(context)
+    }
 
 }

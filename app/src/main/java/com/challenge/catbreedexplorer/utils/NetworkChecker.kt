@@ -5,10 +5,11 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.NetworkInfo
 import android.os.Build
+import javax.inject.Inject
 
-object NetworkUtils {
+class NetworkChecker @Inject constructor(private val context: Context) {
 
-    fun isNetworkAvailable(context: Context): Boolean {
+    fun isOnline(): Boolean {
         val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE)
                 as ConnectivityManager
 

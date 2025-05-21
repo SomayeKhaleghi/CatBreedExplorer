@@ -1,0 +1,126 @@
+Index: app/build.gradle.kts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    alias(libs.plugins.android.application)\r\n    alias(libs.plugins.kotlin.android)\r\n    alias(libs.plugins.kotlin.compose)\r\n\r\n    id(\"com.google.dagger.hilt.android\")\r\n    id(\"com.google.devtools.ksp\")\r\n\r\n}\r\n\r\nandroid {\r\n    namespace = \"com.challenge.catbreedexplorer\"\r\n    compileSdk = 35\r\n\r\n    defaultConfig {\r\n        applicationId = \"com.challenge.catbreedexplorer\"\r\n        minSdk = 21\r\n        targetSdk = 34\r\n        versionCode = 1\r\n        versionName = \"1.0\"\r\n\r\n        testInstrumentationRunner = \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n\r\n        debug {\r\n            buildConfigField(\"String\", \"CAT_API_KEY\", \"\\\"live_GCcvNSFLuUYxjONK9WB1jTlHsQ4pCdwE4H07voDSd4IHc5ITMoUSuNf5nXtVaucp\\\"\")\r\n\r\n        }\r\n        release {\r\n            buildConfigField(\"String\", \"CAT_API_KEY\", \"\\\"live_GCcvNSFLuUYxjONK9WB1jTlHsQ4pCdwE4H07voDSd4IHc5ITMoUSuNf5nXtVaucp\\\"\")\r\n\r\n            isMinifyEnabled = false\r\n            proguardFiles(\r\n                getDefaultProguardFile(\"proguard-android-optimize.txt\"),\r\n                \"proguard-rules.pro\"\r\n            )\r\n        }\r\n    }\r\n\r\n\r\n    /*compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_11\r\n        targetCompatibility = JavaVersion.VERSION_11\r\n\r\n\r\n    }*/\r\n    kotlinOptions {\r\n        jvmTarget = \"17\"\r\n    }\r\n\r\n    buildFeatures {\r\n        buildConfig = true\r\n        compose = true\r\n    }\r\n\r\n    compileOptions {\r\n        sourceCompatibility = JavaVersion.VERSION_17\r\n        targetCompatibility = JavaVersion.VERSION_17\r\n    }\r\n\t\r\n\tcomposeOptions {\r\n\t\tkotlinCompilerExtensionVersion = \"1.5.14\"\r\n\t}\r\n\r\n    tasks.withType<JavaCompile> {\r\n        options.compilerArgs.add(\"-Xlint:-deprecation\")\r\n    }\r\n}\r\n\r\ndependencies {\r\n\r\n    implementation(libs.androidx.core.ktx)\r\n    implementation(libs.androidx.lifecycle.runtime.ktx)\r\n    implementation(libs.androidx.activity.compose)\r\n    implementation(platform(libs.androidx.compose.bom))\r\n    implementation(libs.androidx.ui)\r\n    implementation(libs.androidx.ui.graphics)\r\n    implementation(libs.androidx.ui.tooling.preview)\r\n    implementation(libs.androidx.material3)\r\n    testImplementation(libs.junit)\r\n    androidTestImplementation(libs.androidx.junit)\r\n    androidTestImplementation(libs.androidx.espresso.core)\r\n    androidTestImplementation(platform(libs.androidx.compose.bom))\r\n    androidTestImplementation(libs.androidx.ui.test.junit4)\r\n    debugImplementation(libs.androidx.ui.tooling)\r\n    debugImplementation(libs.androidx.ui.test.manifest)\r\n    implementation (libs.retrofit)\r\n    implementation (libs.converter.gson)\r\n    implementation (libs.okhttp)\r\n    implementation(libs.okhttp.v4100)\r\n    implementation(libs.logging.interceptor)\r\n    implementation(libs.androidx.hilt.navigation.compose)\r\n    implementation(libs.androidx.room.runtime)\r\n    implementation(libs.androidx.room.ktx)\r\n    ksp(libs.androidx.room.compiler)\r\n    implementation(libs.hilt.android)\r\n    ksp(libs.hilt.android.compiler)\r\n    implementation(libs.coil.compose)\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle.kts b/app/build.gradle.kts
+--- a/app/build.gradle.kts	(revision 2bfe409aa7e96fcc756a50fcf8ddcc4f53c4d15f)
++++ b/app/build.gradle.kts	(date 1747783379349)
+@@ -44,6 +44,9 @@
+         sourceCompatibility = JavaVersion.VERSION_11
+         targetCompatibility = JavaVersion.VERSION_11
+ 
++    testImplementation(libs.mockk) // Latest as of 2025
++    testImplementation(libs.kotlinx.coroutines.test) // For coroutine testing
++
+ 
+     }*/
+     kotlinOptions {
+Index: gradle/libs.versions.toml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>[versions]\r\ncoilCompose = \"2.5.0\"\r\nconverterGson = \"2.11.0\"\r\nhiltAndroid = \"2.56.2\"\r\nhiltNavigationCompose = \"1.2.0\"\r\nloggingInterceptor = \"4.9.3\"\r\nokhttp = \"4.9.3\"\r\nokhttpVersion = \"4.12.0\"\r\nagp = \"8.7.3\"\r\nkotlin = \"2.0.21\"\r\ncoreKtx = \"1.16.0\"\r\njunit = \"4.13.2\"\r\njunitVersion = \"1.2.1\"\r\nespressoCore = \"3.6.1\"\r\nlifecycleRuntimeKtx = \"2.9.0\"\r\nactivityCompose = \"1.10.1\"\r\ncomposeBom = \"2024.04.01\"\r\nroomRuntime = \"2.6.1\"\r\n\r\n[libraries]\r\nandroidx-core-ktx = { group = \"androidx.core\", name = \"core-ktx\", version.ref = \"coreKtx\" }\r\nandroidx-hilt-navigation-compose = { module = \"androidx.hilt:hilt-navigation-compose\", version.ref = \"hiltNavigationCompose\" }\r\nandroidx-room-compiler = { module = \"androidx.room:room-compiler\", version.ref = \"roomRuntime\" }\r\nandroidx-room-ktx = { module = \"androidx.room:room-ktx\", version.ref = \"roomRuntime\" }\r\nandroidx-room-runtime = { module = \"androidx.room:room-runtime\", version.ref = \"roomRuntime\" }\r\ncoil-compose = { module = \"io.coil-kt:coil-compose\", version.ref = \"coilCompose\" }\r\nconverter-gson = { module = \"com.squareup.retrofit2:converter-gson\", version.ref = \"converterGson\" }\r\nhilt-android = { module = \"com.google.dagger:hilt-android\", version.ref = \"hiltAndroid\" }\r\nhilt-android-compiler = { module = \"com.google.dagger:hilt-android-compiler\", version.ref = \"hiltAndroid\" }\r\njunit = { group = \"junit\", name = \"junit\", version.ref = \"junit\" }\r\nandroidx-junit = { group = \"androidx.test.ext\", name = \"junit\", version.ref = \"junitVersion\" }\r\nandroidx-espresso-core = { group = \"androidx.test.espresso\", name = \"espresso-core\", version.ref = \"espressoCore\" }\r\nandroidx-lifecycle-runtime-ktx = { group = \"androidx.lifecycle\", name = \"lifecycle-runtime-ktx\", version.ref = \"lifecycleRuntimeKtx\" }\r\nandroidx-activity-compose = { group = \"androidx.activity\", name = \"activity-compose\", version.ref = \"activityCompose\" }\r\nandroidx-compose-bom = { group = \"androidx.compose\", name = \"compose-bom\", version.ref = \"composeBom\" }\r\nandroidx-ui = { group = \"androidx.compose.ui\", name = \"ui\" }\r\nandroidx-ui-graphics = { group = \"androidx.compose.ui\", name = \"ui-graphics\" }\r\nandroidx-ui-tooling = { group = \"androidx.compose.ui\", name = \"ui-tooling\" }\r\nandroidx-ui-tooling-preview = { group = \"androidx.compose.ui\", name = \"ui-tooling-preview\" }\r\nandroidx-ui-test-manifest = { group = \"androidx.compose.ui\", name = \"ui-test-manifest\" }\r\nandroidx-ui-test-junit4 = { group = \"androidx.compose.ui\", name = \"ui-test-junit4\" }\r\nandroidx-material3 = { group = \"androidx.compose.material3\", name = \"material3\" }\r\nlogging-interceptor = { module = \"com.squareup.okhttp3:logging-interceptor\", version.ref = \"loggingInterceptor\" }\r\n#noinspection SimilarGradleDependency\r\nokhttp = { module = \"com.squareup.okhttp3:okhttp\", version.ref = \"okhttp\" }\r\n#noinspection SimilarGradleDependency\r\nokhttp-v4100 = { module = \"com.squareup.okhttp3:okhttp\", version.ref = \"okhttpVersion\" }\r\nretrofit = { module = \"com.squareup.retrofit2:retrofit\", version.ref = \"converterGson\" }\r\n\r\n[plugins]\r\nandroid-application = { id = \"com.android.application\", version.ref = \"agp\" }\r\nkotlin-android = { id = \"org.jetbrains.kotlin.android\", version.ref = \"kotlin\" }\r\nkotlin-compose = { id = \"org.jetbrains.kotlin.plugin.compose\", version.ref = \"kotlin\" }\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/gradle/libs.versions.toml b/gradle/libs.versions.toml
+--- a/gradle/libs.versions.toml	(revision 2bfe409aa7e96fcc756a50fcf8ddcc4f53c4d15f)
++++ b/gradle/libs.versions.toml	(date 1747783395191)
+@@ -1,9 +1,11 @@
+ [versions]
++browser = "1.8.0"
+ coilCompose = "2.5.0"
+ converterGson = "2.11.0"
+ hiltAndroid = "2.56.2"
+ hiltNavigationCompose = "1.2.0"
+ loggingInterceptor = "4.9.3"
++navigationCompose = "2.8.8"
+ okhttp = "4.9.3"
+ okhttpVersion = "4.12.0"
+ agp = "8.7.3"
+@@ -18,8 +20,10 @@
+ roomRuntime = "2.6.1"
+ 
+ [libraries]
++androidx-browser = { module = "androidx.browser:browser", version.ref = "browser" }
+ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+ androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
++androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
+ androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomRuntime" }
+ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRuntime" }
+ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
+Index: app/src/test/java/com/challenge/catbreedexplorer/ui/catlist/CatListViewModelTest.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/challenge/catbreedexplorer/ui/catlist/CatListViewModelTest.kt b/app/src/test/java/com/challenge/catbreedexplorer/ui/catlist/CatListViewModelTest.kt
+new file mode 100644
+--- /dev/null	(date 1747783716422)
++++ b/app/src/test/java/com/challenge/catbreedexplorer/ui/catlist/CatListViewModelTest.kt	(date 1747783716422)
+@@ -0,0 +1,38 @@
++package com.challenge.catbreedexplorer.ui.catlist
++
++import kotlinx.coroutines.ExperimentalCoroutinesApi
++
++@ExperimentalCoroutinesApi
++class CatListViewModelTest {
++
++    private lateinit var repository: CatBreedRepository
++    private lateinit var viewModel: CatListViewModel
++
++    @get:Rule
++    val mainDispatcherRule = MainDispatcherRule() // custom rule to control coroutine dispatcher
++
++    @Before
++    fun setup() {
++        repository = mockk()
++        viewModel = CatListViewModel(repository)
++    }
++
++    @Test
++    fun `refreshCatBreeds loads data and updates state`() = runTest {
++        // Given: A mocked Flow from repository
++        val fakeCats = listOf(CatBreed("1", "Abyssinian", "Desc", "Temp", "Origin", "url"))
++        coEvery { repository.refreshCatBreeds() } just Runs
++        every { repository.getCatBreeds() } returns flowOf(fakeCats)
++
++        // When: Refreshing breeds
++        viewModel.handleIntent(CatListIntent.RefreshCats)
++
++        // Then: ViewModel state should be updated
++        val state = viewModel.state.value
++        assert(state is CatListState.Success && state.cats == fakeCats)
++
++        // Verify
++        coVerify { repository.refreshCatBreeds() }
++        verify { repository.getCatBreeds() }
++    }
++}
+Index: app/src/test/java/com/challenge/catbreedexplorer/testutils/MainDispatcherRule.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/challenge/catbreedexplorer/testutils/MainDispatcherRule.kt b/app/src/test/java/com/challenge/catbreedexplorer/testutils/MainDispatcherRule.kt
+new file mode 100644
+--- /dev/null	(date 1747783622194)
++++ b/app/src/test/java/com/challenge/catbreedexplorer/testutils/MainDispatcherRule.kt	(date 1747783622194)
+@@ -0,0 +1,15 @@
++package com.challenge.catbreedexplorer.testutils
++
++import kotlinx.coroutines.ExperimentalCoroutinesApi
++
++@ExperimentalCoroutinesApi
++class MainDispatcherRule(
++    val testDispatcher: TestDispatcher = StandardTestDispatcher()
++) : TestWatcher() {
++    override fun starting(description: Description) {
++        Dispatchers.setMain(testDispatcher)
++    }
++    override fun finished(description: Description) {
++        Dispatchers.resetMain()
++    }
++}
