@@ -39,7 +39,7 @@ class CatListViewModel @Inject constructor(
             _state.value = CatListState.Loading
             try {
                 try {
-                    if (networkChecker.isOnline())
+                    if (allCatBreeds.isEmpty() &&  networkChecker.isOnline())
                         repository.refreshCatBreeds() // API + DB update
                 } catch (e: Exception) {
                     _state.value = CatListState.Error(e.message ?: "Failed to refreshCatBreeds.")

@@ -40,16 +40,16 @@ object AppModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        val loggingInterceptor = HttpLoggingInterceptor().apply {
+        /*val loggingInterceptor = HttpLoggingInterceptor().apply {
             level = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor.Level.BODY
             } else {
                 HttpLoggingInterceptor.Level.NONE
             }
-        }
+        }*/
 
         return OkHttpClient.Builder()
-            .addInterceptor(loggingInterceptor)
+          //  .addInterceptor(loggingInterceptor)
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
                     .addHeader("x-api-key", BuildConfig.CAT_API_KEY)

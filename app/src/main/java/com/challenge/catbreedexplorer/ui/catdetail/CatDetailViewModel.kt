@@ -30,7 +30,7 @@ class CatDetailViewModel @Inject constructor(
 
                 val breed = catDetailRepository.getBreedById(breedId)
                 val useCache = !networkChecker.isOnline()
-                if (useCache) {
+                if ( (breed != null)  ||  useCache) {
                     val cachedImages =
                         catImageRepository.getImagesForBreed(breedId).firstOrNull() ?: emptyList()
                     if (breed != null) {
