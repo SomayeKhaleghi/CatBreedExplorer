@@ -1,74 +1,96 @@
 # CatBreedExplorer
 
-A modern Android app built with Kotlin and Jetpack Compose to explore, search, and favorite cat breeds using [The Cat API](https://thecatapi.com/). Designed with clean architecture principles, offline support, and rich UI in mind.
-
+A modern Android application built with Jetpack Compose, MVI architecture, Room, Retrofit, and Hilt, allowing users to explore various cat breeds with detailed information and images. Designed with performance, offline support, and clean architecture in mind.
 ---
 
 ## 🚀 Features
 
-- 🐱 Browse paginated list of cat breeds with images and key facts
-- 🔎 Real-time search with debounce
-- 📄 Detailed breed screen with:
-  - Carousel/grid of multiple breed images
-  - Wikipedia integration
-- ❤️ Mark/unmark favorite breeds (persisted across app restarts)
-- 🔌 Offline support (caches details + favorites using Room)
-- 🎨 Modern UI with Material 3 and Jetpack Compose
-- 🌙 Light/Dark mode support
-- 🧪 Unit tests for business logic using Mockk and JUnit
-- 🔐 Secure API key management via `local.properties`
+📄 Cat List Screen
+- Fetches and displays a list of cat breeds from thecatapi.com
+- Real-time search functionality
+- Offline-first design: shows locally cached data if offline
+- Handles screen rotation and maintains state
+- Secure API key management via `local.properties`
+
+📷 Cat Detail Screen
+- Displays detailed breed information: name, origin, lifespan, temperament, and description
+- Shows breed-specific image gallery
+- Offline cache support for previously viewed breed details and images
+- Opens breed Wikipedia link in browser (if available)
+- Avoids unnecessary API calls for already cached images
+
+📅 Offline & Caching Strategy
+- Uses Room to persist both breed and image data
+- Refreshes data only when online
+- Maintains full functionality when offline, thanks to smart caching
+
+🔧 Tech Stack
+- Language: Kotlin
+- UI: Jetpack Compose
+- Architecture: Clean Architecture + MVI
+- Networking: Retrofit + OkHttp
+- DI: Hilt
+- Persistence: Room
 
 ---
 
-## 🏛 Architecture
-
-This project follows **Clean Architecture** using **MVVM + UseCases**, with strict separation of concerns:
-com.challenge.catbreedexplorer
-├── data # Retrofit, DTOs, Room, Mappers
-├── domain # Models, UseCases, Interfaces
-├── presentation# UI (Compose), ViewModels, Navigation
-├── di # Hilt modules
-├── utils # Error handling, Constants, Extensions
-
-
+## 🏛 Architecture Overview
+![image](https://github.com/user-attachments/assets/ccd2b2d5-108c-426e-94b7-1ff547c09eca)
 
 ---
 
-## 🧰 Tech Stack
+## 🔮 Demo
+![video](https://drive.google.com/file/d/1pVMDehKo6sDvC8WVcmYMc24BqWa6fCIL/view?usp=sharing)
 
-| Category         | Technology |
-|------------------|------------|
-| Language         | Kotlin |
-| UI Framework     | Jetpack Compose (Material 3) |
-| Architecture     | Clean Architecture (MVVM + UseCases) |
-| DI               | Hilt |
-| Networking       | Retrofit + OkHttp (with Interceptor) |
-| Image Loading    | Coil |
-| Local Storage    | Room Database |
-| Async            | Kotlin Coroutines + Flow |
-| Testing          | JUnit, Mockk, Coroutine Test |
-| Linting          | KtLint |
-| Build Tools      | Android Studio Hedgehog/Koala (2025+) |
-| API              | [The Cat API](https://thecatapi.com/) |
+This demo showcases:
+- Navigation between list and detail views
+- Smooth scrolling and screen rotation
+- Offline mode functionality after disconnecting network
+- Image caching and restored UI state
+
+- Smooth scrolling and responsive layouts in both portrait and landscape modes
+- Navigating from the cat list to breed detail screen
+- Proper offline caching (data remains accessible when network is disconnected)
+- Image loading optimizations (images are not reloaded unnecessarily)
+- Opening the breed’s Wikipedia page in a browser
+- Error handling and fallback mechanisms in case of network/API failures
+---
+
+## ✅ Completed Tasks
+
+- Implemented Clean Architecture with MVI pattern
+- Room database integration with DAOs for caching breeds and images
+- Retrofit integration with API key handling
+- Dynamic search filtering in Cat List
+- Detail screen loads from local DB if offline
+- NetworkChecker utility without requiring extra permissions
+- Jetpack Compose-based fully reactive UI
+- UI state preservation on rotation
+- Efficient API usage by skipping redundant image loads
+- Comprehensive ViewModel unit testing with MockK + Turbine
+- GitHub README + documentation and video demo
 
 ---
 
-## 🧪 Testing
 
-- ✅ ViewModels and Repositories covered with unit tests
-- ✅ Mockk used for mocking dependencies
-- ✅ Coroutine test rules for testing Flows
-- 🔜 (Optional) UI testing with Compose Test
+## ❌ Remaining / Optional Improvements
 
+- Pagination or lazy loading of API data (currently fetches all at once)
+- UI tests (e.g., using Compose Test framework)
+- Better error handling and retry logic per screen
+- Dark mode or theme customization
+- Localization support
+- test in  some other real device (SDK 21 to 34) 
 ---
 
-## 🧱 Setup Instructions
 
-1. Clone the repo:
-   ```bash
-   git clone https://github.com/your-username/CatBreedExplorer.git
-   cd CatBreedExplorer
-
+## ⚙ RequirementsAndroid 
+- Android Studio Ladybug (2024.2.1 Patch 2) or later
+- Min SDK 21+
+- AGP 8.7.3
+- kotlin 2.0.21
+- Gradle 8.9
+- Internet access for first-time API fetch
 
 
 
