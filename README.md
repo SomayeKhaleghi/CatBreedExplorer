@@ -40,7 +40,7 @@ A modern Android application built with Jetpack Compose, MVI architecture, Room,
 ---
 
 ## 🔮 Demo
-![vido]
+![video](https://drive.google.com/file/d/1pVMDehKo6sDvC8WVcmYMc24BqWa6fCIL/view?usp=sharing)
 
 This demo showcases:
 - Navigation between list and detail views
