@@ -5,6 +5,7 @@ Cat Breed Explorer is a modern Android application built with Jetpack Compose, M
 Although the project is implemented as a single Gradle module, it follows a modular code structure, separating responsibilities across clearly defined layers: data, domain, ui, and di. This architecture is intentionally designed to be scalable and can be easily refactored into multiple Gradle modules as the project grows.
 ---
 
+
 ## 🚀 Features
 
 📄 Cat List Screen
